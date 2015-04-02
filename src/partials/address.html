@@ -1,0 +1,73 @@
+<div class="well well-sm ellipsis">
+  <strong>Address</strong> 
+  <span class="text-muted">{{ address }}</span>
+  <span class="btn-copy" clip-copy="address"></span>
+</div>
+<div class="row">
+  <div class="col-sm-8">
+    <h2>Summary</h2>
+    <div data-ng-hide="!address">
+      <table class="table">
+        <tbody>
+        <tr>
+          <td><strong>Total Received</strong></td>
+          <td class="ellipsis text-right">{{ totalReceived | satoshi2 }}</td>
+        </tr>
+        <tr>
+          <td><strong>Total Sent</strong></td>
+          <td class="ellipsis text-right">{{ totalSent | satoshi2}}</td>
+        </tr>
+        <tr>
+          <td><strong>Final Balance</strong></td>
+          <td class="ellipsis text-right">{{ balance | satoshi2 }}</td>
+        </tr>
+        <tr>
+          <td><strong>No. Transactions</strong></td>
+          <td class="ellipsis text-right">{{ txCount }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-md-4 text-center">
+    <ul class="nav nav-tabs">
+      <li style="width: 45%" ng-click="addressMode = true" ng-class="addressMode ? 'active' : ''"><a href="javascript:void(0)">Address</a></li>
+      <li style="width: 45%" ng-click="addressMode = false" ng-class="addressMode ? '' : 'active'"><a href="javascript:void(0)">WIF</a></li>
+    </ul>
+    <div style="margin: 10px"> 
+      <div ng-if="addressMode">
+        <qrcode size="200" data="{{ address }}"></qrcode>
+      </div>
+      <div ng-if="!addressMode">
+        <qrcode size="200" data="{{ wif }}"></qrcode>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <h2>Transactions</h2>
+    <div>
+      <table class="table table-stripped" data-ng-show="history" >
+        <tbody>
+          <tr>
+            <td> Tx Id </td>
+            <td> Received </td>
+            <td> Sent </td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr data-ng-repeat="h in history">
+            <td> {{ h.recvTxid }} </td>
+            <td> {{ h.received | satoshi2 }} </td>
+            <td> {{ h.sent | satoshi2 }} </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="progress progress-striped active" ng-if="loading">
+        <div class="progress-bar progress-bar-info" style="width: 100%">
+          <span>Loading Transactions...</span>
+        </div>
+      </div>
+  </div>
+</div>

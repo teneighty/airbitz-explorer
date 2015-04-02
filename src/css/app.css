@@ -1,0 +1,25 @@
+html {
+    overflow-y:scroll;
+    height: 100%;
+}
+body {
+    overflow-y:scroll;
+    height: 100%;
+}
+
+.navbar-default {
+    color: #FFF;
+    background-color: #2291cf;
+}
+.navbar-default .navbar-brand {
+    color: #FFF;
+    font-weight: bold;
+}
+
+#main {
+    padding-top: 80px;
+}
+
+.container {
+    width: 900px;
+}
